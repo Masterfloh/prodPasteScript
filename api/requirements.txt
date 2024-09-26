@@ -1,0 +1,4 @@
+Flask==2.1.1
+Werkzeug==2.0.3
+gunicorn==21.2.0
+pyautogui==0.9.53
