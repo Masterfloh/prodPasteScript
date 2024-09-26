@@ -13,7 +13,7 @@ STOP_SIGNAL_FILE = "stop_signal.txt"
 
 @app.route('/')
 def index():
-    return send_from_directory('.', 'frontend.html')  # Ensure it serves from the current directory
+    return send_from_directory('.', 'frontend.html')  # Serve the frontend HTML
 
 @app.route('/paste', methods=['POST'])
 def paste_text():
@@ -35,7 +35,7 @@ def paste_text():
             f.write("")
 
         # Call the typing script with the text as an argument
-        subprocess.Popen(['python', os.path.join('.', 'type_script.py'), text])  # Ensure the correct path
+        subprocess.Popen(['python', os.path.join('api', 'type_script.py'), text])  # Ensure the correct path
     except Exception as e:
         logging.error(f"Error processing file: {str(e)}")
         return jsonify({"message": f"Error processing file: {str(e)}"}), 500
@@ -52,4 +52,3 @@ def stop_typing():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
-
